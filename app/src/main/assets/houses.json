@@ -1,0 +1,354 @@
+{
+  "houses": [
+    {
+      "nombre": "Stark",
+      "descripcion": "Casa antigua del Norte, señores de Invernalia y guardianes del Muro.",
+      "lema": "Se acerca el invierno",
+      "personajes_destacados": [
+        {
+          "nombre": "Eddard Stark",
+          "biografia": "Lord de Invernalia y Mano del Rey Robert Baratheon. Conocido por su honor y justicia, padre de seis hijos y ejecutado por defender la verdad.",
+          "imagen": "https://oyster.ignimgs.com/mediawiki/apis.ign.com/game-of-thrones/c/c5/Eddard_stark_and_ice.jpg"
+        }
+      ],
+      "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/House_Stark.svg/200px-House_Stark.svg.png",
+      "ubicacion": "El Norte"
+    },
+    {
+      "nombre": "Lannister",
+      "descripcion": "Poderosa casa de Roca Casterly, con gran riqueza por sus minas de oro.",
+      "lema": "¡Escúchenme rugir!",
+      "personajes_destacados": [
+        {
+          "nombre": "Tywin Lannister",
+          "biografia": "Señor de Roca Casterly, Mano del Rey en dos ocasiones. Estratega implacable que restableció el poder de su casa.",
+          "imagen": "https://static.wikia.nocookie.net/deadliestfiction/images/8/89/TywinLannisterCP.png/revision/latest/scale-to-width/360?cb=20150810012109"
+        }
+      ],
+      "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/94/House_Lannister.svg/200px-House_Lannister.svg.png",
+      "ubicacion": "Tierras del Occidente"
+    },
+    {
+      "nombre": "Baratheon",
+      "descripcion": "Casa real de Desembarco del Rey tras la Rebelión de Robert, señores de Bastión de Tormentas.",
+      "lema": "Nuestra es la furia",
+      "personajes_destacados": [
+        {
+          "nombre": "Robert Baratheon",
+          "biografia": "Rey de los Siete Reinos tras liderar la rebelión contra los Targaryen. Amigo de Eddard Stark, su reinado estuvo marcado por el exceso y la decadencia.",
+          "imagen": "https://external-preview.redd.it/SeEtb8np-EZfSlduwPZIVW_VAtYn5aFP-SBxAJSQEKU.jpg?auto=webp&s=2d01b44ed7538d3f40d2301b9bb9f048365f35f1"
+        }
+      ],
+      "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1f/House_Baratheon.svg/200px-House_Baratheon.svg.png",
+      "ubicacion": "Tierras de la Corona"
+    },
+    {
+      "nombre": "Targaryen",
+      "descripcion": "Antigua dinastía de reyes dragones, gobernantes desde Rocadragón hasta la usurpación.",
+      "lema": "Fuego y sangre",
+      "personajes_destacados": [
+        {
+          "nombre": "Daenerys Targaryen",
+          "biografia": "Última superviviente de la línea legítima de los dragones. Liberadora de esclavos y aspirante al Trono de Hierro, conocida como la Madre de Dragones.",
+          "imagen": "https://elcomercio.pe/resizer/ay1ug-UZbuENKA5-6QqnDhGjQBo=/1200x1200/smart/filters:format(jpeg):quality(75)/arc-anglerfish-arc2-prod-elcomercio.s3.amazonaws.com/public/3SST7EZLDVEM7POHMJ5JT27HCU.jpg"
+        }
+      ],
+      "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/House_Targaryen.svg/200px-House_Targaryen.svg.png",
+      "ubicacion": "Rocadragón"
+    },
+    {
+      "nombre": "Greyjoy",
+      "descripcion": "Señores de las Islas del Hierro, maestres de la piratería y la religión de los Nuevos Dioses.",
+      "lema": "No sembramos",
+      "personajes_destacados": [
+        {
+          "nombre": "Balon Greyjoy",
+          "biografia": "Señor de Pyke y líder de la Rebelión Greyjoy. Aspiraba a restaurar el Viejo Camino de saqueo y dominio marítimo.",
+          "imagen": "https://static.wikia.nocookie.net/hieloyfuego/images/2/21/Balon_Greyjoy_HBO.jpg/revision/latest?cb=20120424143414"
+        }
+      ],
+      "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/House_Greyjoy.svg/200px-House_Greyjoy.svg.png",
+      "ubicacion": "Islas del Hierro"
+    },
+    {
+      "nombre": "Tyrell",
+      "descripcion": "Casa rica y cultivadora de la fértil región del Dominio, señores de Altojardín.",
+      "lema": "Florecer fuerte",
+      "personajes_destacados": [
+        {
+          "nombre": "Margaery Tyrell",
+          "biografia": "Nietastra de Olenna, reina consorte de cuatro reyes. Destacada por su inteligencia política y popularidad entre el pueblo.",
+          "imagen": "https://platform.vox.com/wp-content/uploads/sites/2/chorus/uploads/chorus_asset/file/15347280/marg.0.0.1536999999.jpg?quality=90&strip=all&crop=0.10134279199392,0,99.797314416012,100"
+        }
+      ],
+      "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/House_Tyrell.svg/200px-House_Tyrell.svg.png",
+      "ubicacion": "El Dominio"
+    },
+    {
+      "nombre": "Martell",
+      "descripcion": "Señores de Lanza del Sol, en el árido reino de Dorne, famosos por su cultura igualitaria.",
+      "lema": "No ceden, no se doblan, no se rompen",
+      "personajes_destacados": [
+        {
+          "nombre": "Oberyn Martell",
+          "biografia": "El Víbora Roja de Dorne, famoso duelista y defensor de la justicia, buscó venganza por la muerte de su hermana.",
+          "imagen": "https://static.wikia.nocookie.net/gameofthrones/images/4/44/Oberyn-Martell-house-martell_s3.jpg/revision/latest?cb=20190427200207"
+        }
+      ],
+      "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/House_Martell.svg/200px-House_Martell.svg.png",
+      "ubicacion": "Dorne"
+    },
+    {
+      "nombre": "Tully",
+      "descripcion": "Casa señorial de Aguasdulces, ubicada en los ríos entre el Norte y Occidente.",
+      "lema": "Familia, deber, honor",
+      "personajes_destacados": [
+        {
+          "nombre": "Catelyn Tully Stark",
+          "biografia": "Hija de Hoster Tully, esposa de Eddard Stark. Luchó por la supervivencia de su familia y buscó aliados en Poniente.",
+          "imagen": "https://static.wikia.nocookie.net/gameofthronesfanon/images/d/d8/CatelynS3Promo.jpg/revision/latest?cb=20181031044100&path-prefix=es"
+        }
+      ],
+      "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/House_Tully.svg/200px-House_Tully.svg.png",
+      "ubicacion": "Tierras de los Ríos"
+    },
+    {
+      "nombre": "Arryn",
+      "descripcion": "Señores del Nido de Águilas, defensores de las Montañas de la Luna.",
+      "lema": "Tan alto como el honor",
+      "personajes_destacados": [
+        {
+          "nombre": "Jon Arryn",
+          "biografia": "Mano del Rey Robert Baratheon antes de su muerte. Su asesinato desató los eventos que llevaron a la Guerra de los Cinco Reyes.",
+          "imagen": "https://static.wikia.nocookie.net/gameofthronesfanon/images/a/ac/Tumblr_inline_nj4pn15ySO1r3va93.jpg/revision/latest?cb=20181031035545&path-prefix=es"
+        }
+      ],
+      "imagen": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c9/House_Arryn.svg/200px-House_Arryn.svg.png",
+      "ubicacion": "El Valle"
+    },
+    {
+      "nombre": "Bolton",
+      "descripcion": "Vasallos de los Stark en el Norte, señores de Fuerte Terror, reputados por su crueldad.",
+      "lema": "Nuestros cuchillos están afilados",
+      "personajes_destacados": [
+        {
+          "nombre": "Roose Bolton",
+          "biografia": "Señor de Fuerte Terror, astuto y despiadado. Traicionó a los Stark en la Boda Roja.",
+          "imagen": "https://static.wikia.nocookie.net/hieloyfuego/images/e/e6/Roose_Bolton_HBO.jpg/revision/latest?cb=20160505221718"
+        }
+      ],
+      "imagen": "https://awoiaf.westeros.org/images/thumb/5/5f/House_Bolton.svg/200px-House_Bolton.svg.png",
+      "ubicacion": "El Norte"
+    },
+    {
+      "nombre": "Mormont",
+      "descripcion": "Casa guerrera de la Isla del Oso, leales Starks del Norte.",
+      "lema": "Aquí permanecemos",
+      "personajes_destacados": [
+        {
+          "nombre": "Lyanna Mormont",
+          "biografia": "Joven señora de Casa Mormont, famosa por su valentía y discurso ante el Concilio de Invernalia.",
+          "imagen": "https://static.wikia.nocookie.net/gameofthrones/images/b/b9/Lyanna_S8_EP2infobox.jpg/revision/latest?cb=20190418000519"
+        }
+      ],
+      "imagen": "https://awoiaf.westeros.org/images/thumb/d/d9/House_Mormont.svg/200px-House_Mormont.svg.png",
+      "ubicacion": "Isla del Oso"
+    },
+    {
+      "nombre": "Karstark",
+      "descripcion": "Rama de los Stark, señores de Bastión Kar, situados al norte de Invernalia.",
+      "lema": "El hombre que dicta la victoria controla el campo",
+      "personajes_destacados": [
+        {
+          "nombre": "Rickard Karstark",
+          "biografia": "Señor de Bastión Kar, vengativo tras la muerte de sus hijos, causó tensiones en la Guerra de los Cinco Reyes.",
+          "imagen": "https://static.wikia.nocookie.net/gameofthrones/images/9/9d/Karstark.jpg/revision/latest?cb=20170701013013"
+        }
+      ],
+      "imagen": "https://awoiaf.westeros.org/images/thumb/1/15/House_Karstark.svg/200px-House_Karstark.svg.png",
+      "ubicacion": "El Norte"
+    },
+    {
+      "nombre": "Frey",
+      "descripcion": "Señores de Aguasdulces, ganaron poder al controlar el cruce del Tridente.",
+      "lema": "Ninguno conoce mejor los ríos",
+      "personajes_destacados": [
+        {
+          "nombre": "Walder Frey",
+          "biografia": "Patriarca anciano con innumerables descendientes. Organizador de la Boda Roja.",
+          "imagen": "https://static.wikia.nocookie.net/hieloyfuego/images/7/73/Walder_Frey_HBO.jpg/revision/latest?cb=20231005152850"
+        }
+      ],
+      "imagen": "https://awoiaf.westeros.org/images/thumb/4/4e/House_Frey.svg/200px-House_Frey.svg.png",
+      "ubicacion": "Tierras de los Ríos"
+    },
+    {
+      "nombre": "Tarly",
+      "descripcion": "Vasallos de los Tyrell, señores de Colina Cuerno, famosos por sus hombres de armas.",
+      "lema": "Valentía en la adversidad",
+      "personajes_destacados": [
+        {
+          "nombre": "Samwell Tarly",
+          "biografia": "Hijo de Randyll Tarly, estudioso en la Ciudadela y amigo cercano de Jon Snow.",
+          "imagen": "https://hips.hearstapps.com/hmg-prod/images/samwell-1556317449.jpg?crop=1xw:1xh;center,top&resize=980:*"
+        }
+      ],
+      "imagen": "https://awoiaf.westeros.org/images/thumb/8/8e/House_Tarly.svg/200px-House_Tarly.svg.png",
+      "ubicacion": "El Dominio"
+    },
+    {
+      "nombre": "Reed",
+      "descripcion": "Señores de Aguasdulces del Pantano, vasallos leales de los Stark.",
+      "lema": "Protegemos el Norte",
+      "personajes_destacados": [
+        {
+          "nombre": "Howland Reed",
+          "biografia": "Señor de Aguasdulces del Pantano, único superviviente conocido junto a sus hijos de la Rebelión de Robert.",
+          "imagen": "https://static.wikia.nocookie.net/hieloyfuego/images/d/d7/Howland_Reed_HBO.png/revision/latest?cb=20160509185942"
+        }
+      ],
+      "imagen": "https://awoiaf.westeros.org/images/thumb/4/4c/House_Reed.svg/200px-House_Reed.svg.png",
+      "ubicacion": "El Norte"
+    },
+    {
+      "nombre": "Umber",
+      "descripcion": "Tribu de salvajes civilizados en el extremo Norte, vasallos de los Stark.",
+      "lema": "Fuerza sobre todo",
+      "personajes_destacados": [
+        {
+          "nombre": "Greatjon Umber",
+          "biografia": "Señor de Último Hogar, conocido por su gran tamaño y ferocidad en batalla.",
+          "imagen": "https://static.wikia.nocookie.net/gameofthrones/images/3/3d/Greatjon-Profile.jpg/revision/latest/scale-to-width-down/600?cb=20160825234644"
+        }
+      ],
+      "imagen": "https://awoiaf.westeros.org/images/thumb/e/e6/House_Umber.svg/200px-House_Umber.svg.png",
+      "ubicacion": "El Norte"
+    },
+    {
+      "nombre": "Clegane",
+      "descripcion": "Casa menor de las Tierras de la Corona, conocidos por su fuerza bruta.",
+      "lema": "La colina ante nosotros",
+      "personajes_destacados": [
+        {
+          "nombre": "Sandor Clegane",
+          "biografia": "Conocido como El Perro, guerrero hábil pero atormentado por su brutalidad y miedo al fuego.",
+          "imagen": "https://upload.wikimedia.org/wikipedia/en/thumb/5/59/The_Hound_in_%27The_Children%27.jpg/250px-The_Hound_in_%27The_Children%27.jpg"
+        }
+      ],
+      "imagen": "https://awoiaf.westeros.org/images/thumb/9/9d/House_Clegane.svg/200px-House_Clegane.svg.png",
+      "ubicacion": "Tierras de la Corona"
+    },
+    {
+      "nombre": "Hightower",
+      "descripcion": "Vasallos de los Tyrell, señores de Antigua, guardianes de la ciudad y faro del Dominio.",
+      "lema": "Firme como la piedra",
+      "personajes_destacados": [
+        {
+          "nombre": "Leyton Hightower",
+          "biografia": "Señor de Antigua y Mano del Señor de los Siete Reinos bajo Aegon V, influyente en los asuntos del Dominio.",
+          "imagen": "https://static.wikia.nocookie.net/iron-throne-roleplay5113/images/d/d5/POP.jpg/revision/latest?cb=20170826220345"
+        }
+      ],
+      "imagen": "https://awoiaf.westeros.org/images/thumb/3/30/House_Hightower.svg/200px-House_Hightower.svg.png",
+      "ubicacion": "El Dominio"
+    },
+    {
+      "nombre": "Glover",
+      "descripcion": "Señores de Puerto Braavos en el Norte, vasallos de Invernalia y reputados marineros.",
+      "lema": "Los barcos nos salvarán",
+      "personajes_destacados": [
+        {
+          "nombre": "Robett Glover",
+          "biografia": "Miembro de la Casa Glover y hermano de Galbart; tras la caída de Deepwood Motte asume el liderazgo de su casa como señor de Deepwood Motte. Es un vasallo del Norte, vinculado a los Stark y descrito como un noble rudo y de aspecto ordinario.",
+          "imagen": "https://static.wikia.nocookie.net/gameofthrones/images/a/ab/610_Robett_Declaring.png/revision/latest?cb=20171006064202"
+        }
+      ],
+      "imagen": "https://awoiaf.westeros.org/images/thumb/4/45/House_Glover.svg/200px-House_Glover.svg.png",
+      "ubicacion": "El Norte"
+    },
+    {
+      "nombre": "Manderly",
+      "descripcion": "Rica casa de Puerto Blanco, vasallos de los Stark del Norte, conocidos por su flota mercante.",
+      "lema": "El norte recuerda",
+      "personajes_destacados": [
+        {
+          "nombre": "Wyman Manderly",
+          "biografia": "Señor de Puerto Blanco, hábil diplomático, participó en intrigas para vengar la Boda Roja.",
+          "imagen": "https://static.wikia.nocookie.net/hieloyfuego/images/7/7a/Wyman_Manderly_HBO.PNG/revision/latest?cb=20170922210359"
+        }
+      ],
+      "imagen": "https://awoiaf.westeros.org/images/thumb/5/50/House_Manderly.svg/200px-House_Manderly.svg.png",
+      "ubicacion": "El Norte"
+    },
+    {
+      "nombre": "Royce",
+      "descripcion": "Señores de Runrún en el Valle, vasallos orgullosos y hábiles en la guerra de montaña.",
+      "lema": "El pico más alto siempre prevalece",
+      "personajes_destacados": [
+        {
+          "nombre": "Yohn Royce",
+          "biografia": "Señor de Runrún, veterano guerrero y aliado leal de la Casa Arryn.",
+          "imagen": "https://static.wikia.nocookie.net/hieloyfuego/images/8/87/Yohn_Royce_HBO.png/revision/latest?cb=20220907204935"
+        }
+      ],
+      "imagen": "https://via.placeholder.org/200?text=House+Royce",
+      "ubicacion": "El Valle"
+    },
+    {
+      "nombre": "Blackwood",
+      "descripcion": "Plañideras de los Ríos, vasallos de los Tully con profunda tradición de ritos ancestrales.",
+      "lema": "Nuestra fe fluye profundo",
+      "personajes_destacados": [
+        {
+          "nombre": "Brynden Blackwood",
+          "biografia": "Señor de Doloroscuro, mantuvo la lealtad a los Tully durante la rebelión de los Frey.",
+          "imagen": "https://pm1.aminoapps.com/6882/37596ec5eb41c13808cfa5e7320f57b8a666d396r1-594-400v2_hq.jpg"
+        }
+      ],
+      "imagen": "https://awoiaf.westeros.org/images/thumb/1/17/House_Blackwood.svg/200px-House_Blackwood.svg.png",
+      "ubicacion": "Tierras de los Ríos"
+    },
+    {
+      "nombre": "Florent",
+      "descripcion": "Casa menor de la Corona, señores de Bastión Rosado, vinculados a la familia real Baratheon.",
+      "lema": "Firmeza en la adversidad",
+      "personajes_destacados": [
+        {
+          "nombre": "Alester Florent",
+          "biografia": "Señor de Brightwater Keep y cabeza de la Casa Florent, rico y ambicioso; en la Guerra de los Cinco Reyes apoyó primero a Renly Baratheon y luego pasó a la causa de Stannis. Es antepasado directo de Melessa Florent (madre de Samwell Tarly) y figura relevante del Dominio.",
+          "imagen": "https://static.wikia.nocookie.net/eisundfeuer/images/8/89/Alester_Florent_Chris_Pritchard.jpg/revision/latest/thumbnail/width/360/height/360?cb=20190211191218&path-prefix=de"
+        }
+      ],
+      "imagen": "https://awoiaf.westeros.org/images/thumb/0/0f/House_Florent.svg/200px-House_Florent.svg.png",
+      "ubicacion": "Tierras de la Corona"
+    },
+    {
+      "nombre": "Darry",
+      "descripcion": "Señores de Bastión Darry en las Tierras de los Ríos, primeros en rendir homenaje a Robb Stark.",
+      "lema": "Lealtad y sangre",
+      "personajes_destacados": [
+        {
+          "nombre": "Willem Darry",
+          "biografia": "Caballero de la Casa Darry que sirvió como maestro de armas de la Fortaleza Roja bajo Aerys II Targaryen; conocido por su lealtad a los Targaryen y su posterior exilio/hospitalidad en Braavos, donde terminó sus días por enfermedad. Fue una figura leal y discreta durante los últimos años del reinado Targaryen.",
+          "imagen": "https://static.wikia.nocookie.net/iceandfire/images/e/eb/Willem_Darry.png/revision/latest?cb=20250128152326"
+        }
+      ],
+      "imagen": "https://awoiaf.westeros.org/images/thumb/a/a1/House_Darry.svg/200px-House_Darry.svg.png",
+      "ubicacion": "Tierras de los Ríos"
+    },
+    {
+      "nombre": "Harlaw",
+      "descripcion": "Una de las principales casas de las Islas del Hierro, señores de Puerto Harlaw.",
+      "lema": "Nadie camina libre",
+      "personajes_destacados": [
+        {
+          "nombre": "Rodrik Harlaw",
+          "biografia": "Señor de Puerto Harlaw, lideró las fuerzas de las Islas del Hierro en apoyo de Balon Greyjoy.",
+          "imagen": "https://static.wikia.nocookie.net/hieloyfuego/images/c/cb/Rodrik_Harlaw_by_~mustamirri%C2%A9.png/revision/latest?cb=20130428041305"
+        }
+      ],
+      "imagen": "https://awoiaf.westeros.org/images/thumb/6/63/House_Harlaw.svg/200px-House_Harlaw.svg.png",
+      "ubicacion": "Islas del Hierro"
+    }
+  ]
+}
