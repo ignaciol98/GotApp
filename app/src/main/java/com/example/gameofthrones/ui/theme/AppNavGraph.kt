@@ -21,6 +21,7 @@ import com.example.gameofthrones.ui.theme.houses.SearchableHouseListScreen
 import com.example.gameofthrones.ui.theme.houses.HouseDetailScreen
 import com.example.gameofthrones.ui.theme.map.SimplifiedMapScreen
 import com.example.gameofthrones.ui.theme.map.RegionViewModel
+import androidx.compose.runtime.LaunchedEffect
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -64,13 +65,31 @@ fun AppNavGraph(modifier: Modifier = Modifier) {
 
         // Detalle de casa
         composable("detail/{houseId}") { backStackEntry ->
-            val houseId = backStackEntry.arguments!!.getString("houseId")!!
-            val house: House? = houses.firstOrNull { it.id == houseId }
-            if (house != null) {
-                HouseDetailScreen(house = house)
+            val houseId = backStackEntry.arguments?.getString("houseId") ?: return@composable
+
+            // ViewModel específico de detalle
+            val detailVM: HouseDetailViewModel = hiltViewModel()
+
+            // Observamos los flows del viewModel
+            val houseState by detailVM.house.collectAsState()
+            val isFav by detailVM.isFavorite.collectAsState()
+
+            // Cargar la casa y comenzar a observar favorito (se ejecuta una vez al entrar)
+            LaunchedEffect(houseId) {
+                detailVM.load(houseId)
+            }
+
+            if (houseState != null) {
+                HouseDetailScreen(
+                    house = houseState!!,
+                    isFavorite = isFav,
+                    onToggleFavorite = { detailVM.toggleFavorite(houseId) },
+                    onBack = { navController.popBackStack() }
+                )
             } else {
+                // Mientras carga o si no existe: muestra un texto simple (puedes cambiarlo por un loader)
                 Text(
-                    text = "Casa no encontrada",
+                    text = "Cargando...",
                     modifier = Modifier
                         .fillMaxSize()
                         .wrapContentSize(Alignment.Center)
