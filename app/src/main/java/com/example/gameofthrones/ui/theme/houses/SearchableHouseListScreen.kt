@@ -22,7 +22,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
-import coil.compose.rememberAsyncImagePainter
+import coil.compose.AsyncImage
 import com.example.gameofthrones.R
 import com.example.gameofthrones.model.House
 import java.util.*
@@ -59,6 +59,14 @@ fun SearchableHouseListScreen(
             modifier = Modifier.fillMaxSize()
         ) {
             items(filtered) { house ->
+                val drawableId = remember(house.id) {
+                    context.resources.getIdentifier(
+                        house.id.lowercase(Locale.ROOT),
+                        "drawable",
+                        context.packageName
+                    )
+                }
+
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -68,60 +76,55 @@ fun SearchableHouseListScreen(
                         containerColor = Color.Transparent,
                         contentColor = MaterialTheme.colorScheme.onBackground
                     ),
-                    shape = RoundedCornerShape(8.dp),
+                    shape = RoundedCornerShape(8.dp)
                 ) {
                     Row(
                         modifier = Modifier
-                            .padding(16.dp)
+                            .padding(12.dp)
                             .fillMaxWidth(),
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        // show remote sigil if present, otherwise try drawable (by id/name)
-                        if (!house.sigilUrl.isNullOrBlank()) {
+                        // Prioridad 1: drawable local
+                        if (drawableId != 0) {
                             Image(
-                                painter = rememberAsyncImagePainter(model = house.sigilUrl),
+                                painter = painterResource(id = drawableId),
                                 contentDescription = "${house.name} escudo",
                                 modifier = Modifier
                                     .size(48.dp)
-                                    .clip(RoundedCornerShape(4.dp))
+                                    .clip(RoundedCornerShape(6.dp))
+                            )
+                        } else if (!house.sigilUrl.isNullOrBlank()) {
+                            // Prioridad 2: imagen remota (Coil)
+                            AsyncImage(
+                                model = house.sigilUrl,
+                                contentDescription = "${house.name} escudo",
+                                placeholder = painterResource(id = R.drawable.question),
+                                error = painterResource(id = R.drawable.question),
+                                modifier = Modifier
+                                    .size(48.dp)
+                                    .clip(RoundedCornerShape(6.dp))
                             )
                         } else {
-                            val drawableId = remember(house.id) {
-                                context.resources.getIdentifier(
-                                    house.id.lowercase(Locale.ROOT),
-                                    "drawable",
-                                    context.packageName
-                                )
-                            }
-                            if (drawableId != 0) {
-                                Image(
-                                    painter = painterResource(id = drawableId),
-                                    contentDescription = "${house.name} escudo",
-                                    modifier = Modifier
-                                        .size(48.dp)
-                                        .clip(RoundedCornerShape(4.dp))
-                                )
-                            } else {
-                                Box(
-                                    modifier = Modifier
-                                        .size(48.dp)
-                                        .background(Color.LightGray, RoundedCornerShape(4.dp))
-                                )
-                            }
+                            // Fallback
+                            Image(
+                                painter = painterResource(id = R.drawable.question),
+                                contentDescription = "sin escudo",
+                                modifier = Modifier
+                                    .size(48.dp)
+                                    .clip(RoundedCornerShape(6.dp))
+                            )
                         }
 
-                        Spacer(modifier = Modifier.width(16.dp))
+                        Spacer(modifier = Modifier.width(12.dp))
 
                         Column {
                             Text(
                                 text = house.name,
-                                style = MaterialTheme.typography.titleMedium,
-                                color = MaterialTheme.colorScheme.onBackground
+                                style = MaterialTheme.typography.titleMedium
                             )
                             Text(
-                                text = house.motto ?: "",
-                                style = MaterialTheme.typography.bodySmall,
-                                color = MaterialTheme.colorScheme.onBackground
+                                text = house.motto ?: "Sin lema",
+                                style = MaterialTheme.typography.bodySmall
                             )
                         }
                     }

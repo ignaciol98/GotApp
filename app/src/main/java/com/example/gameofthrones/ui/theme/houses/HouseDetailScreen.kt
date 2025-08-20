@@ -13,7 +13,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import coil.compose.rememberAsyncImagePainter
+import coil.compose.AsyncImage
 import com.example.gameofthrones.R
 import com.example.gameofthrones.model.House
 import java.util.*
@@ -37,18 +37,30 @@ fun HouseDetailScreen(
             .fillMaxSize()
             .padding(16.dp)
     ) {
-        if (!house.sigilUrl.isNullOrBlank()) {
+        // Escudo: prioridad1 drawable local, prioridad2 sigilUrl remota, fallback
+        if (drawableId != 0) {
             Image(
-                painter = rememberAsyncImagePainter(model = house.sigilUrl),
+                painter = painterResource(id = drawableId),
                 contentDescription = "${house.name} escudo",
                 modifier = Modifier
                     .size(128.dp)
                     .align(Alignment.CenterHorizontally)
                     .clip(RoundedCornerShape(8.dp))
             )
-        } else if (drawableId != 0) {
+        } else if (!house.sigilUrl.isNullOrBlank()) {
+            AsyncImage(
+                model = house.sigilUrl,
+                contentDescription = "${house.name} escudo",
+                placeholder = painterResource(id = R.drawable.question),
+                error = painterResource(id = R.drawable.question),
+                modifier = Modifier
+                    .size(128.dp)
+                    .align(Alignment.CenterHorizontally)
+                    .clip(RoundedCornerShape(8.dp))
+            )
+        } else {
             Image(
-                painter = painterResource(id = drawableId),
+                painter = painterResource(id = R.drawable.question),
                 contentDescription = "${house.name} escudo",
                 modifier = Modifier
                     .size(128.dp)
@@ -94,11 +106,12 @@ fun HouseDetailScreen(
         ) {
             house.notableCharacters.forEach { character ->
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    // Si el character tiene imageUrl la mostramos, sino placeholder
                     if (character.imageUrl.isNotBlank()) {
-                        Image(
-                            painter = rememberAsyncImagePainter(model = character.imageUrl),
+                        AsyncImage(
+                            model = character.imageUrl,
                             contentDescription = character.name,
+                            placeholder = painterResource(id = R.drawable.question),
+                            error = painterResource(id = R.drawable.question),
                             modifier = Modifier
                                 .size(56.dp)
                                 .clip(RoundedCornerShape(8.dp))

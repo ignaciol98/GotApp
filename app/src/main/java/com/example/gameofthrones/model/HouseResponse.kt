@@ -9,22 +9,24 @@ data class HouseResponse(
     val descripcion: String,
     val lema: String? = null,
     val personajes_destacados: List<PersonajeResponse> = emptyList(),
-    val imagen: String? = null,   // tu JSON usa "imagen" para la URL del escudo
-    val ubicacion: String
+    val imagen: String? = null,
+    val ubicacion: String? = null,
+    val id: String? = null // si lo traes, o calculalo desde nombre
 ) {
     fun toDomain(): House {
-        val id = nombre.lowercase(Locale.ROOT).replace("\\s+".toRegex(), "_")
+        val generatedId = id ?: nombre.lowercase(Locale.ROOT).replace("\\s+".toRegex(), "_")
         return House(
-            id = id,
+            id = generatedId,
             name = nombre,
             sigilUrl = imagen ?: "",
             description = descripcion,
-            motto = lema,
+            motto = lema ?: "",
             notableCharacters = personajes_destacados.map { it.toDomain() },
-            locationName = ubicacion
+            locationName = ubicacion ?: ""
         )
     }
 }
+
 
 
 
