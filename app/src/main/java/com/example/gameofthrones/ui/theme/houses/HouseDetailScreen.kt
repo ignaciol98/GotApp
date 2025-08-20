@@ -1,8 +1,11 @@
 package com.example.gameofthrones.ui.theme.houses
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -14,38 +17,69 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import androidx.compose.ui.layout.ContentScale
 import com.example.gameofthrones.R
 import com.example.gameofthrones.model.House
-import java.util.*
+import java.text.Normalizer
+import java.util.Locale
 
 @Composable
 fun HouseDetailScreen(
     house: House
 ) {
-    val context = LocalContext.current
+    val ctx = LocalContext.current
 
-    val drawableId = remember(house.id) {
-        context.resources.getIdentifier(
-            house.id.lowercase(Locale.ROOT),
-            "drawable",
-            context.packageName
-        )
+    // Función local para normalizar nombres (quita acentos y no alfanuméricos)
+    fun normalizeName(input: String): String {
+        val noAccents = Normalizer.normalize(input, Normalizer.Form.NFD)
+            .replace("\\p{InCombiningDiacriticalMarks}+".toRegex(), "")
+        return noAccents
+            .lowercase(Locale.ROOT)
+            .replace("[^a-z0-9]+".toRegex(), "_")
+            .trim('_')
+    }
+
+    // Intenta varias combinaciones plausibles de nombre de recurso drawable
+    val triedNames = remember(house) {
+        listOfNotNull(
+            house.id.takeIf { it.isNotBlank() },
+            normalizeName(house.name).takeIf { it.isNotBlank() },
+            "house_${normalizeName(house.name)}".takeIf { it.isNotBlank() }
+        ).distinct()
+    }
+
+    val drawableId = remember(triedNames, ctx.packageName) {
+        var found = 0
+        for (name in triedNames) {
+            val res = ctx.resources.getIdentifier(name, "drawable", ctx.packageName)
+            if (res != 0) {
+                found = res
+                break
+            }
+        }
+        // debug: si quieres ver qué nombres probó, consulta Logcat
+        Log.d("HouseDetail", "Tried names=$triedNames -> drawableId=$found")
+        found
     }
 
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
+            .verticalScroll(rememberScrollState())
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Escudo: prioridad1 drawable local, prioridad2 sigilUrl remota, fallback
+        Spacer(Modifier.height(8.dp))
+
+        // Escudo: PRIORIDAD -> drawable local -> URL remota -> fallback (question)
         if (drawableId != 0) {
             Image(
                 painter = painterResource(id = drawableId),
                 contentDescription = "${house.name} escudo",
                 modifier = Modifier
-                    .size(128.dp)
-                    .align(Alignment.CenterHorizontally)
-                    .clip(RoundedCornerShape(8.dp))
+                    .size(160.dp)
+                    .clip(RoundedCornerShape(12.dp)),
+                contentScale = ContentScale.Crop
             )
         } else if (!house.sigilUrl.isNullOrBlank()) {
             AsyncImage(
@@ -54,58 +88,51 @@ fun HouseDetailScreen(
                 placeholder = painterResource(id = R.drawable.question),
                 error = painterResource(id = R.drawable.question),
                 modifier = Modifier
-                    .size(128.dp)
-                    .align(Alignment.CenterHorizontally)
-                    .clip(RoundedCornerShape(8.dp))
+                    .size(160.dp)
+                    .clip(RoundedCornerShape(12.dp)),
+                contentScale = ContentScale.Crop
             )
         } else {
             Image(
                 painter = painterResource(id = R.drawable.question),
-                contentDescription = "${house.name} escudo",
+                contentDescription = "Sin escudo",
                 modifier = Modifier
-                    .size(128.dp)
-                    .align(Alignment.CenterHorizontally)
-                    .clip(RoundedCornerShape(8.dp))
+                    .size(160.dp)
+                    .clip(RoundedCornerShape(12.dp)),
+                contentScale = ContentScale.Crop
             )
         }
 
-        Spacer(Modifier.height(16.dp))
+        Spacer(Modifier.height(12.dp))
 
-        Text(
-            text = house.name,
-            style = MaterialTheme.typography.headlineMedium,
-            modifier = Modifier.align(Alignment.CenterHorizontally)
-        )
+        Text(text = house.name, style = MaterialTheme.typography.headlineMedium)
+        Text(text = house.motto ?: "Sin lema", style = MaterialTheme.typography.bodyMedium)
 
-        Text(
-            text = house.motto ?: "Sin lema",
-            style = MaterialTheme.typography.bodyMedium,
-            modifier = Modifier.align(Alignment.CenterHorizontally)
-        )
-
-        Spacer(Modifier.height(24.dp))
+        Spacer(Modifier.height(18.dp))
 
         Text(
             text = "Descripción:",
-            style = MaterialTheme.typography.titleMedium
+            style = MaterialTheme.typography.titleMedium,
+            modifier = Modifier.fillMaxWidth()
         )
-        Text(
-            text = house.description,
-            style = MaterialTheme.typography.bodySmall
-        )
+        Text(text = house.description, style = MaterialTheme.typography.bodyMedium)
 
-        Spacer(Modifier.height(24.dp))
+        Spacer(Modifier.height(18.dp))
 
         Text(
             text = "Personajes destacados:",
-            style = MaterialTheme.typography.titleMedium
+            style = MaterialTheme.typography.titleMedium,
+            modifier = Modifier.fillMaxWidth()
         )
+
+        Spacer(Modifier.height(18.dp))
+
         Column(
-            verticalArrangement = Arrangement.spacedBy(12.dp),
-            modifier = Modifier.padding(start = 8.dp, top = 8.dp)
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(20.dp)
         ) {
             house.notableCharacters.forEach { character ->
-                Row(verticalAlignment = Alignment.CenterVertically) {
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     if (character.imageUrl.isNotBlank()) {
                         AsyncImage(
                             model = character.imageUrl,
@@ -113,24 +140,24 @@ fun HouseDetailScreen(
                             placeholder = painterResource(id = R.drawable.question),
                             error = painterResource(id = R.drawable.question),
                             modifier = Modifier
-                                .size(56.dp)
-                                .clip(RoundedCornerShape(8.dp))
+                                .size(180.dp)
+                                .clip(RoundedCornerShape(8.dp)),
+                            contentScale = ContentScale.Crop
                         )
                     } else {
                         Image(
                             painter = painterResource(id = R.drawable.question),
                             contentDescription = character.name,
                             modifier = Modifier
-                                .size(56.dp)
-                                .clip(RoundedCornerShape(8.dp))
+                                .size(120.dp)
+                                .clip(RoundedCornerShape(8.dp)),
+                            contentScale = ContentScale.Crop
                         )
                     }
-
-                    Spacer(modifier = Modifier.width(12.dp))
-                    Column {
-                        Text(text = character.name, style = MaterialTheme.typography.titleSmall)
-                        Text(text = character.biography, style = MaterialTheme.typography.bodySmall)
-                    }
+                    Spacer(Modifier.height(10.dp))
+                    Text(text = character.name, style = MaterialTheme.typography.titleSmall)
+                    Spacer(Modifier.height(9.dp))
+                    Text(text = character.biography, style = MaterialTheme.typography.bodySmall)
                 }
             }
         }

@@ -1,6 +1,6 @@
 package com.example.gameofthrones.ui.theme.map
 
-import android.content.Context
+import android.content.res.Resources
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -21,13 +21,12 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import coil.compose.rememberAsyncImagePainter
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.Dp
+import coil.compose.AsyncImage
 import androidx.compose.ui.unit.dp
 import com.example.gameofthrones.R
 import com.example.gameofthrones.model.Region
 import com.example.gameofthrones.model.House
+import java.util.Locale
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -38,14 +37,12 @@ fun SimplifiedMapScreen(
 ) {
     var selectedRegion by remember { mutableStateOf<Region?>(null) }
 
-    // Obtener dimensiones de pantalla en dp
     val config = LocalConfiguration.current
     val screenWidth = config.screenWidthDp.dp
     val screenHeight = config.screenHeightDp.dp
-    val ctx = LocalContext.current
 
     Box(modifier = Modifier.fillMaxSize()) {
-        // Imagen de fondo (mapa de Poniente)
+        // Fondo (mapa)
         Image(
             painter = painterResource(id = R.drawable.ic_map_poniente),
             contentDescription = "Mapa de Poniente",
@@ -53,7 +50,7 @@ fun SimplifiedMapScreen(
             contentScale = ContentScale.Crop
         )
 
-        // Áreas "tocables" (ejemplos; ajusta offsets/tamaños según tu mapa)
+        // Zonas "tocables" (ajusta offsets/tamaños según tu imagen)
         Box(
             modifier = Modifier
                 .offset(x = screenWidth * 0.13f, y = screenHeight * 0.12f)
@@ -118,9 +115,10 @@ fun SimplifiedMapScreen(
                 .background(Color.Transparent)
         )
 
-        // Si hay región seleccionada, muestro sus casas en un BottomSheet
+        // BottomSheet con casas de la región seleccionada
         selectedRegion?.let { region ->
             val regionHouses = houses.filter { it.id in region.houseIds }
+            val context = LocalContext.current
 
             ModalBottomSheet(onDismissRequest = { selectedRegion = null }) {
                 Text(
@@ -141,25 +139,48 @@ fun SimplifiedMapScreen(
                                 .clickable { onHouseClick(house.id) }
                                 .padding(8.dp)
                         ) {
-                            // <-- Aquí: llamamos *directamente* a composables en el scope composable
-                            val painter = if (!house.sigilUrl.isNullOrBlank()) {
-                                // carga remota con Coil (devuelve Painter)
-                                rememberAsyncImagePainter(model = house.sigilUrl)
-                            } else {
-                                // intenta drawable por id de casa; si no existe fallback
-                                val drawableId = getDrawableIdForHouse(ctx, house.id)
-                                if (drawableId != 0) painterResource(id = drawableId)
-                                else painterResource(id = R.drawable.question)
+                            // resolver drawable local (convención: id normalizado a lowercase)
+                            val drawableId = remember(house.id) {
+                                context.resources.getIdentifier(
+                                    house.id.lowercase(Locale.getDefault()),
+                                    "drawable",
+                                    context.packageName
+                                )
                             }
 
-                            Image(
-                                painter = painter,
-                                contentDescription = house.name,
-                                modifier = Modifier
-                                    .size(48.dp)
-                                    .clip(RoundedCornerShape(4.dp)),
-                                contentScale = ContentScale.Crop
-                            )
+                            // Primero: drawable local si existe
+                            if (drawableId != 0) {
+                                Image(
+                                    painter = painterResource(id = drawableId),
+                                    contentDescription = "${house.name} escudo",
+                                    modifier = Modifier
+                                        .size(48.dp)
+                                        .clip(RoundedCornerShape(4.dp)),
+                                    contentScale = ContentScale.Crop
+                                )
+                            } else if (!house.sigilUrl.isNullOrBlank()) {
+                                // Segundo: url remota con Coil AsyncImage
+                                AsyncImage(
+                                    model = house.sigilUrl,
+                                    contentDescription = "${house.name} escudo",
+                                    placeholder = painterResource(id = R.drawable.question),
+                                    error = painterResource(id = R.drawable.question),
+                                    modifier = Modifier
+                                        .size(48.dp)
+                                        .clip(RoundedCornerShape(4.dp)),
+                                    contentScale = ContentScale.Crop
+                                )
+                            } else {
+                                // Fallback
+                                Image(
+                                    painter = painterResource(id = R.drawable.question),
+                                    contentDescription = "sin escudo",
+                                    modifier = Modifier
+                                        .size(48.dp)
+                                        .clip(RoundedCornerShape(4.dp)),
+                                    contentScale = ContentScale.Crop
+                                )
+                            }
 
                             Spacer(Modifier.width(12.dp))
 
@@ -176,10 +197,4 @@ fun SimplifiedMapScreen(
             }
         }
     }
-}
-
-/** Busca el drawable local por nombre de casa (ej: "Stark" -> R.drawable.stark) */
-private fun getDrawableIdForHouse(context: Context, houseId: String): Int {
-    val resName = houseId.lowercase().replace("\\s+".toRegex(), "_")
-    return context.resources.getIdentifier(resName, "drawable", context.packageName)
 }
