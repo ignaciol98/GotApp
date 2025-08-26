@@ -4,33 +4,51 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
-import androidx.compose.material3.Scaffold
+import androidx.core.view.WindowCompat
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.gameofthrones.ui.theme.AppNavGraph
 import com.example.gameofthrones.ui.theme.GameOfThronesTheme
+import com.example.gameofthrones.ui.theme.ThemeMode
+import com.example.gameofthrones.ui.theme.ThemeViewModel
+
 import dagger.hilt.android.AndroidEntryPoint
-import androidx.compose.ui.graphics.Color
-import androidx.compose.material3.MaterialTheme
-import androidx.core.view.WindowCompat
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Habilita edge-to-edge (quita el ajuste automático de los decor windows).
-        // Alternativa: si tenías una función enableEdgeToEdge(), podés removerla y usar esto.
+        // Edge-to-edge
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
         setContent {
-            GameOfThronesTheme {
-                // 1. Contenedor de fondo
+            // 👇 Tomamos el modo de tema persistido (SYSTEM / LIGHT / DARK)
+            val themeVM: ThemeViewModel = hiltViewModel()
+            val mode by themeVM.mode.collectAsState()
+
+            val dark = when (mode) {
+                ThemeMode.SYSTEM -> isSystemInDarkTheme()
+                ThemeMode.LIGHT -> false
+                ThemeMode.DARK -> true
+            }
+
+            GameOfThronesTheme(darkTheme = dark) {
+                // 1) Contenedor de fondo
                 Box(modifier = Modifier.fillMaxSize()) {
-                    // 2. Imagen de pergamino en segundo plano (ocupa todo el fondo)
+                    // 2) Pergamino como background global (si preferís, podés moverlo a cada pantalla)
                     Image(
                         painter = painterResource(R.drawable.bg_parchment),
                         contentDescription = null,
@@ -38,8 +56,7 @@ class MainActivity : ComponentActivity() {
                         contentScale = ContentScale.Crop
                     )
 
-                    // 3. UI principal encima. Aplicamos systemBarsPadding() para que el contenido
-                    //    no quede debajo de la barra de estado / navegación.
+                    // 3) UI principal encima
                     Scaffold(
                         modifier = Modifier
                             .fillMaxSize()
@@ -48,8 +65,7 @@ class MainActivity : ComponentActivity() {
                         contentColor = MaterialTheme.colorScheme.onBackground
                     ) { innerPadding ->
                         AppNavGraph(
-                            modifier = Modifier
-                                .padding(innerPadding)
+                            modifier = Modifier.padding(innerPadding)
                         )
                     }
                 }

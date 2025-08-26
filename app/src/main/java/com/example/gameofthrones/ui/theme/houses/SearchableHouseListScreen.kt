@@ -1,31 +1,55 @@
 package com.example.gameofthrones.ui.theme.houses
 
 import android.content.res.Resources
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Text
+import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.example.gameofthrones.R
 import com.example.gameofthrones.model.House
-import java.util.*
+import java.util.Locale
+
+// --- Helper: imagen con fade-in suave (Coil + alpha animada) ---
+@Composable
+private fun FadingAsyncImage(
+    model: Any?,
+    contentDesc: String?,
+    modifier: Modifier = Modifier,
+    contentScale: ContentScale = ContentScale.Crop
+) {
+    var loaded by remember { mutableStateOf(false) }
+    val alpha by animateFloatAsState(targetValue = if (loaded) 1f else 0f, label = "img_fade")
+
+    AsyncImage(
+        model = ImageRequest.Builder(LocalContext.current)
+            .data(model)
+            .crossfade(true)
+            .build(),
+        contentDescription = contentDesc,
+        modifier = modifier.graphicsLayer { this.alpha = alpha },
+        contentScale = contentScale,
+        onSuccess = { loaded = true },
+        onLoading = { loaded = false },
+        onError = { loaded = true }
+    )
+}
 
 @Composable
 fun SearchableHouseListScreen(
@@ -91,18 +115,18 @@ fun SearchableHouseListScreen(
                                 contentDescription = "${house.name} escudo",
                                 modifier = Modifier
                                     .size(48.dp)
-                                    .clip(RoundedCornerShape(6.dp))
+                                    .clip(RoundedCornerShape(6.dp)),
+                                contentScale = ContentScale.Crop
                             )
                         } else if (!house.sigilUrl.isNullOrBlank()) {
-                            // Prioridad 2: imagen remota (Coil)
-                            AsyncImage(
+                            // Prioridad 2: imagen remota (con fade-in)
+                            FadingAsyncImage(
                                 model = house.sigilUrl,
-                                contentDescription = "${house.name} escudo",
-                                placeholder = painterResource(id = R.drawable.question),
-                                error = painterResource(id = R.drawable.question),
+                                contentDesc = "${house.name} escudo",
                                 modifier = Modifier
                                     .size(48.dp)
-                                    .clip(RoundedCornerShape(6.dp))
+                                    .clip(RoundedCornerShape(6.dp)),
+                                contentScale = ContentScale.Crop
                             )
                         } else {
                             // Fallback
@@ -111,7 +135,8 @@ fun SearchableHouseListScreen(
                                 contentDescription = "sin escudo",
                                 modifier = Modifier
                                     .size(48.dp)
-                                    .clip(RoundedCornerShape(6.dp))
+                                    .clip(RoundedCornerShape(6.dp)),
+                                contentScale = ContentScale.Crop
                             )
                         }
 
