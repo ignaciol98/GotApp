@@ -47,19 +47,19 @@ android {
 }
 
 dependencies {
-    // ---- Compose (usando tu Version Catalog + BOM) ----
+    // Compose
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.activity.compose)
-    implementation("androidx.compose.material:material-icons-extended") // sin versión: la toma del BOM
+    implementation("androidx.compose.material:material-icons-extended")
 
-    // Navegación Compose (si no está en tu catalog)
+    // Navegación Compose
     implementation("androidx.navigation:navigation-compose:2.7.7")
 
-    // ---- Accompanist Navigation Animation (versión explícita) ----
+    //  Accompanist Navigation Animation
     implementation("com.google.accompanist:accompanist-navigation-animation:0.34.0")
 
     // Lifecycle & ViewModel
@@ -99,4 +99,8 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
+    // Unit tests (Flows/Coroutines)
+    testImplementation("org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3")
+    testImplementation("app.cash.turbine:turbine:1.0.0") // asserts sobre Flow sencillos
 }

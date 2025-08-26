@@ -1,9 +1,7 @@
 package com.example.gameofthrones.ui.theme.houses
 
-import android.content.res.Resources
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -17,6 +15,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.unit.dp
@@ -24,6 +23,7 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.gameofthrones.R
 import com.example.gameofthrones.model.House
+import androidx.compose.foundation.clickable
 import java.util.Locale
 
 // --- Helper: imagen con fade-in suave (Coil + alpha animada) ---
@@ -75,7 +75,24 @@ fun SearchableHouseListScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(16.dp)
+                .testTag("search") // 👈 para UI tests
         )
+
+        if (filtered.isEmpty()) {
+            // Estado vacío simple para una mejor UX y tests más claros
+            Box(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(16.dp),
+                contentAlignment = Alignment.Center
+            ) {
+                Text(
+                    text = "Sin resultados",
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+            return@Column
+        }
 
         LazyColumn(
             contentPadding = PaddingValues(horizontal = 16.dp, vertical = 8.dp),
@@ -94,6 +111,8 @@ fun SearchableHouseListScreen(
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
+                        .testTag("house-${house.id}") // 👈 para UI tests
+                        .then(Modifier) // placeholder por si querés agregar clickable externamente
                         .clickable { onHouseClick(house.id) },
                     elevation = CardDefaults.cardElevation(0.dp),
                     colors = CardDefaults.cardColors(
