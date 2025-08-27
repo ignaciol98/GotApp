@@ -8,7 +8,7 @@ Incluye favoritos, cambio de tema (oscuro/claro) y tests automatizados.
 
 ## 🎥 Demo
 
-![demo](./screenshots/demo.gif)  
+![demo](./demo.gif)  
 
 
 ---
@@ -58,8 +58,8 @@ La aplicación incluye **tests automatizados** para garantizar calidad:
 
 |        Lista de casas       |       Detalle de casa         |      Mapa interactivo    |          Favoritos                 |
 |      ----------------       |       -----------------       |     ------------------   |          -----------               |
-| ![](./screenshots/list.png) | ![](./screenshots/detail.png) | ![](./screenshots/map.png) | ![](./screenshots/favorites.png) |
-<img width="1080" height="2400" alt="list" src="https://github.com/user-attachments/assets/46ea2c61-ad48-4d80-b372-4b70da92646c" /> 
+|      ![](./list.png)        |    ![](./detail.png)          |      ![](./map.png)      |        ![](./favorites.png)        |
+
 
 
 
@@ -78,6 +78,8 @@ La aplicación incluye **tests automatizados** para garantizar calidad:
 4. Ejecutar en emulador o dispositivo físico.
 
 👨‍💻 Autor
+
 Desarrollado por Ignacio Nicolas Lupo
+
 📧 ignaciolupo98@gmail.com
 💼 LinkedIn/ https://www.linkedin.com/in/ignacio-lupo-484352252/
