@@ -48,7 +48,7 @@ class MainActivity : ComponentActivity() {
             GameOfThronesTheme(darkTheme = dark) {
                 // 1) Contenedor de fondo
                 Box(modifier = Modifier.fillMaxSize()) {
-                    // 2) Pergamino como background global (si preferís, podés moverlo a cada pantalla)
+                    // 2) Pergamino como background global
                     Image(
                         painter = painterResource(R.drawable.bg_parchment),
                         contentDescription = null,

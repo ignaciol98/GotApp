@@ -20,7 +20,7 @@ class HousesViewModel @Inject constructor(
     private val favoriteRepo: FavoriteRepository
 ) : ViewModel() {
 
-    // --- Modelo original de casas (cargado desde tu repo)
+    // --- Modelo original de casas
     private val _houses = MutableStateFlow<List<House>>(emptyList())
     val houses: StateFlow<List<House>> = _houses.asStateFlow()
 
@@ -44,7 +44,7 @@ class HousesViewModel @Inject constructor(
         // 2) Coleccionar los favoritos desde la DB y mantener _favoriteIds actualizado
         viewModelScope.launch {
             favoriteRepo.getAllFavoriteIds()                 // Flow<List<String>>
-                .map { list -> list.toSet() }               // convertimos a Set<String>
+                .map { list -> list.toSet() }               // convierte a Set<String>
                 .collect { set -> _favoriteIds.value = set }
         }
 
@@ -61,7 +61,7 @@ class HousesViewModel @Inject constructor(
         }
     }
 
-    // Método público para alternar favorito (UI lo llama)
+    // Metodo público para alternar favorito (UI lo llama)
     fun toggleFavorite(houseId: String) {
         viewModelScope.launch {
             val currentlyFav = _favoriteIds.value.contains(houseId)

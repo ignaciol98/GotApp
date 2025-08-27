@@ -36,12 +36,10 @@ class SearchableHouseListScreenTest {
         )
 
         rule.setContent {
-            // OJO: este import debe existir arriba:
-            // import com.example.gameofthrones.ui.theme.houses.SearchableHouseListScreen
             SearchableHouseListScreen(houses = houses, onHouseClick = {})
         }
 
-        // Ambos visibles al inicio
+
         rule.onNodeWithTag("house-stark").assertIsDisplayed()
         rule.onNodeWithTag("house-lannister").assertIsDisplayed()
 
@@ -50,7 +48,6 @@ class SearchableHouseListScreenTest {
 
         // Stark permanece visible
         rule.onNodeWithTag("house-stark").assertIsDisplayed()
-        // Si tu lista deja de renderizar Lannister, podés verificar:
-        // rule.onNodeWithTag("house-lannister").assertDoesNotExist()
+
     }
 }

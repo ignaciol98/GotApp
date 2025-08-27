@@ -35,7 +35,7 @@ import com.example.gameofthrones.ui.theme.houseColorSchemeFor
 import java.text.Normalizer
 import java.util.Locale
 
-// ---------- Helper: imagen con fade-in suave (Coil + alpha animada) ----------
+
 @Composable
 private fun FadingAsyncImage(
     model: Any?,
@@ -155,7 +155,7 @@ fun HouseDetailScreen(
             }
         ) { padding ->
             Box(modifier = Modifier.fillMaxSize()) {
-                // 🎨 Fondo pergamino con opacidad según tema
+                //  Fondo pergamino con opacidad según tema
                 val parchmentAlpha = if (isDark) 0.08f else 0.22f
                 Image(
                     painter = painterResource(R.drawable.bg_parchment),
@@ -213,7 +213,7 @@ fun HouseDetailScreen(
 
                     Spacer(Modifier.height(8.dp))
 
-                    // 👉 Lema en chip justo debajo del nombre
+                    //  Lema en chip justo debajo del nombre
                     if (!house.motto.isNullOrBlank()) {
                         Surface(
                             color = MaterialTheme.colorScheme.primary,

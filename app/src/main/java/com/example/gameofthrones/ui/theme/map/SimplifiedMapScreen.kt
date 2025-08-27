@@ -50,7 +50,7 @@ fun SimplifiedMapScreen(
             contentScale = ContentScale.Crop
         )
 
-        // Zonas "tocables" (ajusta offsets/tamaños según tu imagen)
+        // Zonas "tocables"
         Box(
             modifier = Modifier
                 .offset(x = screenWidth * 0.13f, y = screenHeight * 0.12f)

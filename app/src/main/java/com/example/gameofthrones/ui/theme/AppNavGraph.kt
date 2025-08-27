@@ -69,7 +69,7 @@ fun AppNavGraph(modifier: Modifier = Modifier) {
                 if (isDark) MaterialTheme.colorScheme.surface else MaterialTheme.colorScheme.surfaceVariant
             val onBar = MaterialTheme.colorScheme.onSurface
 
-            // VM de tema (para usar en Settings si quisieras mostrar estado aquí también)
+            // VM de tema
             val themeVM: ThemeViewModel = hiltViewModel()
 
             Scaffold(
@@ -261,8 +261,8 @@ fun AppNavGraph(modifier: Modifier = Modifier) {
 
         // SETTINGS
         composable("settings") {
-            // Si tu SettingsScreen ya provee su propia TopBar, podemos llamarla directo.
-            // Le inyectamos el ThemeViewModel con Hilt.
+
+
             val themeVM: ThemeViewModel = hiltViewModel()
             SettingsScreen(
                 themeVM = themeVM,
