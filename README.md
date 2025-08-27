@@ -48,9 +48,9 @@ La aplicación incluye **tests automatizados** para garantizar calidad:
   - `SearchableHouseListScreenTest`: Simula escribir en el buscador y valida que la lista de casas se filtra dinámicamente.  
   - Usa **Compose UI Test** (`createComposeRule`, `onNodeWithTag`, etc.) para comprobar que los elementos correctos aparecen en pantalla.
 
-![tests](./screenshots/tests_passed.png)  
+![tests](./tests_passed.png)  
 
-<img width="1905" height="382" alt="tests_passed" src="https://github.com/user-attachments/assets/525323ea-270a-4dd3-b0fa-bec73ad6e336" />
+
 
 ---
 
