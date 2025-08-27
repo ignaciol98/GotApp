@@ -11,7 +11,7 @@ data class HouseResponse(
     val personajes_destacados: List<PersonajeResponse> = emptyList(),
     val imagen: String? = null,
     val ubicacion: String? = null,
-    val id: String? = null // si lo traes, o calculalo desde nombre
+    val id: String? = null
 ) {
     fun toDomain(): House {
         val generatedId = id ?: nombre.lowercase(Locale.ROOT).replace("\\s+".toRegex(), "_")

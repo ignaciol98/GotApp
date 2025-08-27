@@ -46,8 +46,8 @@ private data class HousePalette(
     val tertiary: Color? = null
 )
 
-// Tonos orientativos, elegidos para reflejar la heráldica típica.
-// Ajustá a tu gusto si querés más fidelidad histórica/artística.
+
+
 
 private val ARRYN     = HousePalette(primary = Color(0xFF2F5AA6), onPrimary = Color.White, secondary = Color(0xFFD7E3F8))
 private val BARATHEON = HousePalette(primary = Color(0xFFE0B100), onPrimary = Color.Black, secondary = Color(0xFF1A1A1A))
@@ -123,12 +123,8 @@ private fun applyHousePalette(base: ColorScheme, hp: HousePalette): ColorScheme 
     )
 }
 
-/**
- * ColorScheme para una Casa concreta. Úsalo en HouseDetailScreen:
- *
- * val scheme = houseColorSchemeFor(house)
- * MaterialTheme(colorScheme = scheme) { ... }
- */
+
+
 @Composable
 fun houseColorSchemeFor(house: House): ColorScheme {
     val dark = isSystemInDarkTheme()

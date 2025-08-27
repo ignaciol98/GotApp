@@ -49,8 +49,7 @@ class HouseDetailViewModel @Inject constructor(
         viewModelScope.launch {
             val newValue = !_isFavorite.value
             favoritesRepo.setFavorite(houseId, newValue)
-            // _isFavorite será actualizado por la colección del flow (arriba),
-            // pero lo seteamos también directamente para respuesta inmediata.
+
             _isFavorite.value = newValue
         }
     }

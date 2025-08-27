@@ -18,7 +18,7 @@ val MerriWeatherFamily = FontFamily(
     Font(R.font.merriweather_bold, FontWeight.Bold)
 )
 
-// Typography para Material3 - mapeo aproximado desde tus estilos Material2
+// Typography para Material3
 val Typography = Typography(
     displayLarge = TextStyle(        // equivalente aproximado de h1
         fontFamily = CinzelFamily,
@@ -41,5 +41,5 @@ val Typography = Typography(
         fontWeight = FontWeight.Medium,
         fontSize = 14.sp
     )
-    // Podés agregar/ajustar otros estilos: displaySmall, headlineLarge, bodyMedium, labelSmall, etc.
+
 )

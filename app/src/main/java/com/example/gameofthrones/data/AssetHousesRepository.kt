@@ -17,7 +17,7 @@ class AssetHousesRepository @Inject constructor(
     private val json = Json { ignoreUnknownKeys = true }
 
     override suspend fun getAllHouses(): List<House> = withContext(Dispatchers.IO) {
-        val assetName = "houses.json" // pon tu JSON en app/src/main/assets/houses.json
+        val assetName = "houses.json"
         context.assets.open(assetName).use { stream ->
             // decodifica la estructura principal: { "houses": [ ... ] }
             val wrapper = json.decodeFromStream<HousesWrapper>(stream)
@@ -30,6 +30,6 @@ class AssetHousesRepository @Inject constructor(
     }
 }
 
-// wrapper para coincidir con tu JSON: { "houses": [ ... ] }
+
 @kotlinx.serialization.Serializable
 private data class HousesWrapper(val houses: List<HouseResponse>)

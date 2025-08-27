@@ -7,7 +7,7 @@ import java.util.*
 data class PersonajeResponse(
     val nombre: String,
     val biografia: String,
-    val imagen: String? = null// Si más tarde añades imagen para personaje, agrega: val imagen: String? = null
+    val imagen: String? = null
 ) {
     fun toDomain(): Character {
         val id = nombre.lowercase(Locale.ROOT).replace("\\s+".toRegex(), "_")
@@ -16,7 +16,7 @@ data class PersonajeResponse(
             name = nombre,
             biography = biografia,
             imageUrl = imagen
-                ?: "" // si tu JSON trae "imagen" del personaje, asigna aquí esa propiedad
+                ?: ""
         )
     }
 }

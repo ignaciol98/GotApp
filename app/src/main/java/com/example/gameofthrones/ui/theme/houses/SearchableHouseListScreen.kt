@@ -26,7 +26,7 @@ import com.example.gameofthrones.model.House
 import androidx.compose.foundation.clickable
 import java.util.Locale
 
-// --- Helper: imagen con fade-in suave (Coil + alpha animada) ---
+
 @Composable
 private fun FadingAsyncImage(
     model: Any?,
@@ -79,7 +79,7 @@ fun SearchableHouseListScreen(
         )
 
         if (filtered.isEmpty()) {
-            // Estado vacío simple para una mejor UX y tests más claros
+
             Box(
                 modifier = Modifier
                     .fillMaxSize()
@@ -112,7 +112,7 @@ fun SearchableHouseListScreen(
                     modifier = Modifier
                         .fillMaxWidth()
                         .testTag("house-${house.id}") // 👈 para UI tests
-                        .then(Modifier) // placeholder por si querés agregar clickable externamente
+                        .then(Modifier)
                         .clickable { onHouseClick(house.id) },
                     elevation = CardDefaults.cardElevation(0.dp),
                     colors = CardDefaults.cardColors(

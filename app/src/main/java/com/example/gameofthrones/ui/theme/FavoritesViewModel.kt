@@ -14,7 +14,7 @@ class FavoritesViewModel @Inject constructor(
     repo: FavoriteRepository
 ) : ViewModel() {
 
-    // IDs de casas favoritas que vienen de Room (dao.getAllFavoritesFlow())
+    // IDs de casas favoritas que vienen de Room
     val favoriteIds: StateFlow<List<String>> =
         repo.getAllFavoriteIds()
             .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5_000), emptyList())

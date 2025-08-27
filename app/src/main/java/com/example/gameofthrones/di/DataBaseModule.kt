@@ -23,7 +23,7 @@ object DatabaseModule {
             AppDatabase::class.java,
             "app_database"
         )
-            .fallbackToDestructiveMigration() // para desarrollo; en producción manejá migraciones
+            .fallbackToDestructiveMigration()
             .build()
     }
 
